@@ -1,0 +1,11 @@
+# Virtuele omgeving
+venv/
+
+# PyCharm instellingen
+.idea/
+
+# Cache bestanden
+__pycache__/
+
+# Dataset (indien groot)
+data/raw/
