@@ -127,3 +127,40 @@ print(classification_report(y_test, y_pred_logreg))
 print(f"ROC AUC Score: {roc_auc_score(y_test, logreg_pipeline.predict_proba(X_test)[:, 1])}")
 
 
+# Next is random forest
+
+# Random Forest Pipeline
+rf_pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Train Random Forest
+rf_pipeline.fit(X_train, y_train)
+y_pred_rf = rf_pipeline.predict(X_test)
+
+# Evaluate Random Forest
+print("Random Forest Classification Report:")
+print(classification_report(y_test, y_pred_rf))
+print(f"ROC AUC Score: {roc_auc_score(y_test, rf_pipeline.predict_proba(X_test)[:, 1])}")
+
+
+#XGBOOST
+
+from xgboost import XGBClassifier
+
+# XGBoost Pipeline
+xgb_pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier', XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42))
+])
+
+# train XGBoost
+xgb_pipeline.fit(X_train, y_train)
+y_pred_xgb = xgb_pipeline.predict(X_test)
+
+# evaluate XGBoost
+print("XGBoost Classification Report:")
+print(classification_report(y_test, y_pred_xgb))
+print(f"ROC AUC Score: {roc_auc_score(y_test, xgb_pipeline.predict_proba(X_test)[:, 1])}")
+
