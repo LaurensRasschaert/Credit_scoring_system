@@ -164,3 +164,14 @@ print("XGBoost Classification Report:")
 print(classification_report(y_test, y_pred_xgb))
 print(f"ROC AUC Score: {roc_auc_score(y_test, xgb_pipeline.predict_proba(X_test)[:, 1])}")
 
+import pickle
+
+# Sla ons XG boost model op
+pickle.dump(xgb_pipeline, open("model/model.pkl", "wb"))
+
+
+from app.api import app
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
